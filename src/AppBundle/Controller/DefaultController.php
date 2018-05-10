@@ -3,11 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Todo;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -27,10 +26,10 @@ class DefaultController extends Controller
 	/**
 	 * @Route("/addtodo", name="addtodo")
 	 *
-	 * @param EntityManager $em
+	 * @param EntityManagerInterface $em
 	 * @return JsonResponse
 	 */
-	public function todoAction(EntityManager $em)
+	public function todoAction(EntityManagerInterface $em)
 	{
 		$todo = new Todo();
 		$em->persist($todo);
