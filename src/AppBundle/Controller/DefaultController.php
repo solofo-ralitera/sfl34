@@ -3,10 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Todo;
+use AppBundle\Service\Hello;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -15,7 +17,7 @@ class DefaultController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
@@ -29,7 +31,7 @@ class DefaultController extends Controller
 	 * @param EntityManagerInterface $em
 	 * @return JsonResponse
 	 */
-	public function todoAction(EntityManagerInterface $em)
+	public function todoAction(EntityManagerInterface $em): JsonResponse
 	{
 		$todo = new Todo();
 		$em->persist($todo);
@@ -39,4 +41,16 @@ class DefaultController extends Controller
 			'id' => $todo->getId(),
 		]);
 	}
+
+    /**
+     * @Route("/hello", name="hello")
+     *
+     * @param Hello $hello
+     * @return Response
+     */
+    public function helloAction(Hello $hello): Response
+    {
+        $res = $hello->sayHello();
+        return new Response($res);
+    }
 }
