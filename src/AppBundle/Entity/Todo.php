@@ -16,6 +16,11 @@ class Todo {
 	 */
 	private $id;
 
+    /**
+     * @var string
+     * @ORM\Column(name="nom", type="string")
+     */
+    private $nom;
 
     /**
      * Get id.
@@ -25,5 +30,29 @@ class Todo {
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * Set nom.
+     *
+     * @param string $nom
+     *
+     * @return Todo
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom.
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
     }
 }
